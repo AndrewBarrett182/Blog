@@ -2,8 +2,7 @@ var express = require('express');
 var router = express.Router();
 var fs = require('fs');
 
-/* GET home page. */
-router.get('/', function(req, res, next) {
+function index(req, res, next) {
   blogs = []
   let filenames = fs.readdirSync("./blogs/");
   filenames.forEach((file) => {
@@ -12,6 +11,9 @@ router.get('/', function(req, res, next) {
     })
   });
   res.render('index', { blog: blogs });
-});
+}
+
+/* GET home page. */
+router.get('/', index);
 
 module.exports = router;
