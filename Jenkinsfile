@@ -7,7 +7,9 @@ pipeline{
         stage("Build"){
             steps{
                 sh 'chmod +x ./blogs.sh'
+                sh 'chmod +x ./requirements.sh'
                 sh './blogs.sh'
+                sh './requirements.sh'
             }
         }
         stage("Deploy"){
