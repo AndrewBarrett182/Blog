@@ -121,11 +121,7 @@ describe('Test the Home page', () => {
   });
   test('Contents', async () => {
     const res = await request(app).get('/');
-<<<<<<< HEAD
     expect(res.text).toContain('<a href="/" class="btn btn-secondary">Home</a>');
-=======
-    expect(res.text).toContain('<h1 class="mb-4">Write On</h1>');
->>>>>>> 051096f9f61fc866068bb36b6b4ca12f3ffbb4df
   });
   afterAll(() => {
     server.close();
@@ -143,11 +139,7 @@ describe('Test the Blog page', () => {
   });
   test('Contents', async () => {
     const res = await request(app).get('/blog');
-<<<<<<< HEAD
     expect(res.text).toContain('<h4 class="card-title mb-2">IDC</h4>');
-=======
-    expect(res.text).toContain('<h1 class="mb-4">Write On</h1>');
->>>>>>> 051096f9f61fc866068bb36b6b4ca12f3ffbb4df
   });
   afterAll(() => {
     server.close();
