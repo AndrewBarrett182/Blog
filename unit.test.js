@@ -118,6 +118,9 @@ describe('Test the home page', () => {
     })
     test('Contents', async() => {
         const res = await request(app).get('/')
-        expect(res.text).toContain('<h1 class="mb-4">Blog Articles</h1>')
+        expect(res.text).toContain('<h1 class="mb-4">Blog</h1>')
     })
+    afterAll(() => {
+        server.close();
+    });
 })
