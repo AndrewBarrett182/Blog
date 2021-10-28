@@ -3,6 +3,9 @@ pipeline{
     options {
         timestamps()
     }
+    tools {
+        nodejs "nodejs"
+    }
     stages{
         stage("Build"){
             steps{
