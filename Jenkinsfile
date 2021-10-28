@@ -6,10 +6,15 @@ pipeline{
     stages{
         stage("Build"){
             steps{
-                sh 'chmod +x ./blogs.sh'
-                sh 'chmod +x ./requirements.sh'
-                sh './blogs.sh'
-                sh './requirements.sh'
+                sh '''
+                chmod +x ./blogs.sh
+                ./blogs.sh
+                /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+                brew update
+                brew install node
+                node -v
+                npm -v
+                '''
             }
         }
         stage("Deploy"){
