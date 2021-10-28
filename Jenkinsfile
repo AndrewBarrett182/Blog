@@ -13,16 +13,16 @@ pipeline{
                 sh './blogs.sh'
             }
         }
+        stage("Unit Test"){
+            steps{
+                sh 'npm run unit-test'
+            }
+        }
         stage("UI") {
             parallel {
                 stage("Deploy"){
                     steps{
                         sh 'npm run start'
-                    }
-                }
-                stage("Unit Test"){
-                    steps{
-                        sh 'npm run unit-test'
                     }
                 }
                 stage("UI Test"){
