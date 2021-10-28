@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1635434399583" clover="3.2.0">
-  <project timestamp="1635434399583" name="All files">
+<coverage generated="1635439265045" clover="3.2.0">
+  <project timestamp="1635439265045" name="All files">
     <metrics statements="18" coveredstatements="18" conditionals="0" coveredconditionals="0" methods="4" coveredmethods="4" elements="22" coveredelements="22" complexity="0" loc="18" ncloc="18" packages="1" files="2" classes="2"/>
     <file name="blog.js" path="/Users/andrew.barrett/Desktop/Blog/routes/blog.js">
       <metrics statements="13" coveredstatements="13" conditionals="0" coveredconditionals="0" methods="3" coveredmethods="3"/>

@@ -121,7 +121,7 @@ describe('Test the Home page', () => {
   });
   test('Contents', async () => {
     const res = await request(app).get('/');
-    expect(res.text).toContain('<h1 class="mb-4">Blog</h1>');
+    expect(res.text).toContain('<a href="/" class="btn btn-secondary">Home</a>');
   });
   afterAll(() => {
     server.close();
@@ -139,7 +139,7 @@ describe('Test the Blog page', () => {
   });
   test('Contents', async () => {
     const res = await request(app).get('/blog');
-    expect(res.text).toContain('<h1 class="mb-4">Blog</h1>');
+    expect(res.text).toContain('<h4 class="card-title mb-2">IDC</h4>');
   });
   afterAll(() => {
     server.close();
