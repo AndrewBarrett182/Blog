@@ -110,7 +110,7 @@ function onListening() {
 
 // Tests
 
-describe('Test the home page', () => {
+describe('Test the Home page', () => {
   test('Status Code', async () => {
     const res = await request(app).get('/');
     expect(res.statusCode).toBe(200);
@@ -121,6 +121,24 @@ describe('Test the home page', () => {
   });
   test('Contents', async () => {
     const res = await request(app).get('/');
+    expect(res.text).toContain('<h1 class="mb-4">Blog</h1>');
+  });
+  afterAll(() => {
+    server.close();
+  });
+});
+
+describe('Test the Blog page', () => {
+  test('Status Code', async () => {
+    const res = await request(app).get('/blog');
+    expect(res.statusCode).toBe(200);
+  });
+  test('HTML Format', async () => {
+    const res = await request(app).get('/blog');
+    expect(res.header['content-type']).toBe('text/html; charset=utf-8');
+  });
+  test('Contents', async () => {
+    const res = await request(app).get('/blog');
     expect(res.text).toContain('<h1 class="mb-4">Blog</h1>');
   });
   afterAll(() => {

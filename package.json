@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": "nodemon ./bin/www",
-    "unit-test": "node --experimental-vm-modules node_modules/.bin/jest --coverage",
+    "unit-test": "jest unit.test.js --coverage",
     "cypress-test": "cypress open"
   },
   "dependencies": {
