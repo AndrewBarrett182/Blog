@@ -1,3 +1,4 @@
+/* eslint-disable consistent-return */
 /// <reference types="cypress" />
 // ***********************************************************
 // This example plugins/index.js can be used to load plugins
@@ -20,7 +21,7 @@ module.exports = (on, config) => {
   on('before:browser:launch', (browser, launchOptions) => {
     if ((browser.name === 'chrome' || browser.name === 'edge') && browser.isHeadless) {
       launchOptions.args.push('--disable-gpu');
-      return launchOptions
+      return launchOptions;
     }
   });
-}
+};

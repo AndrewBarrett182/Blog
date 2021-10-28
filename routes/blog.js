@@ -1,20 +1,21 @@
-var express = require('express');
-var router = express.Router();
-var fs = require('fs');
+const express = require('express');
 
-function blog(req, res, next) {
-  const blogs = []
-  let filenames = fs.readdirSync("./blogs/");
+const router = express.Router();
+const fs = require('fs');
+
+function blog(req, res) {
+  const blogs = [];
+  const filenames = fs.readdirSync('./blogs/');
   filenames.forEach((file) => {
-    fs.readFile("./blogs/"+file, 'utf8', function(err, data) {
-      var title = file.toUpperCase().replace('_', ' ').split('.')
-      title.pop()
+    fs.readFile(`./blogs/${file}`, 'utf8', (err, data) => {
+      const title = file.toUpperCase().replace('_', ' ').split('.');
+      title.pop();
       blogs.push({
         content: data,
         name: title,
-        date: new Date().toLocaleDateString()
-      })
-    })
+        date: new Date().toLocaleDateString(),
+      });
+    });
   });
   res.render('blog', { blog: blogs });
 }

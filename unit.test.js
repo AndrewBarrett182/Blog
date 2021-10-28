@@ -1,19 +1,25 @@
-var request = require('supertest')
-var createError = require('http-errors');
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
-var hbs = require("express-handlebars");
+/* eslint-disable no-undef */
+/* eslint-disable no-restricted-globals */
+/* eslint-disable no-shadow */
+/* eslint-disable no-use-before-define */
+const request = require('supertest');
+const createError = require('http-errors');
+const express = require('express');
+const path = require('path');
+const cookieParser = require('cookie-parser');
+const logger = require('morgan');
+const hbs = require('express-handlebars');
 
-var homeRoute = require('./routes/home.js');
-var blogRoute = require('./routes/blog.js');
-//var showBlogRoute = require('./routes/showBlog.js');
+const debug = require('debug')('blog:server');
+const http = require('http');
+const homeRoute = require('./routes/home');
+const blogRoute = require('./routes/blog');
+// var showBlogRoute = require('./routes/showBlog.js');
 
-var app = express();
+const app = express();
 
 // view engine setup
-app.engine('hbs', hbs({extname: 'hbs', defaultLayout: 'layout', layoutsDir: __dirname + '/views/layouts/'}))
+app.engine('hbs', hbs({ extname: 'hbs', defaultLayout: 'layout', layoutsDir: `${__dirname}/views/layouts/` }));
 app.set('views', path.join(__dirname, '/views'));
 app.set('view engine', 'hbs');
 
@@ -25,15 +31,15 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', homeRoute);
 app.use('/blog', blogRoute);
-//app.use('/blog', showBlogRoute);
+// app.use('/blog', showBlogRoute);
 
 // catch 404 and forward to error handler
-app.use(function(req, res, next) {
+app.use((req, res, next) => {
   next(createError(404));
 });
 
 // error handler
-app.use(function(err, req, res, next) {
+app.use((err, req, res) => {
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
@@ -45,20 +51,17 @@ app.use(function(err, req, res, next) {
 
 // www
 
-var debug = require('debug')('blog:server');
-var http = require('http');
-
-var port = normalizePort(process.env.PORT || '3000');
+const port = normalizePort(process.env.PORT || '3000');
 app.set('port', port);
 
-var server = http.createServer(app);
+const server = http.createServer(app);
 
 server.listen(port);
 server.on('error', onError);
 server.on('listening', onListening);
 
 function normalizePort(val) {
-  var port = parseInt(val, 10);
+  const port = parseInt(val, 10);
 
   if (isNaN(port)) {
     // named pipe
@@ -78,18 +81,18 @@ function onError(error) {
     throw error;
   }
 
-  var bind = typeof port === 'string'
-    ? 'Pipe ' + port
-    : 'Port ' + port;
+  // const bind = typeof port === 'string'
+  //   ? `Pipe ${port}`
+  //   : `Port ${port}`;
 
   // handle specific listen errors with friendly messages
   switch (error.code) {
     case 'EACCES':
-      console.error(bind + ' requires elevated privileges');
+      // console.error(`${bind} requires elevated privileges`);
       process.exit(1);
       break;
     case 'EADDRINUSE':
-      console.error(bind + ' is already in use');
+      // console.error(`${bind} is already in use`);
       process.exit(1);
       break;
     default:
@@ -98,29 +101,29 @@ function onError(error) {
 }
 
 function onListening() {
-  var addr = server.address();
-  var bind = typeof addr === 'string'
-    ? 'pipe ' + addr
-    : 'port ' + addr.port;
-  debug('Listening on ' + bind);
+  const addr = server.address();
+  const bind = typeof addr === 'string'
+    ? `pipe ${addr}`
+    : `port ${addr.port}`;
+  debug(`Listening on ${bind}`);
 }
 
 // Tests
 
 describe('Test the home page', () => {
-    test('Status Code', async() => {
-        const res = await request(app).get('/')
-        expect(res.statusCode).toBe(200)
-    })
-    test('HTML Format', async() => {
-        const res = await request(app).get('/')
-        expect(res.header['content-type']).toBe('text/html; charset=utf-8')
-    })
-    test('Contents', async() => {
-        const res = await request(app).get('/')
-        expect(res.text).toContain('<h1 class="mb-4">Blog</h1>')
-    })
-    afterAll(() => {
-        server.close();
-    });
-})
+  test('Status Code', async () => {
+    const res = await request(app).get('/');
+    expect(res.statusCode).toBe(200);
+  });
+  test('HTML Format', async () => {
+    const res = await request(app).get('/');
+    expect(res.header['content-type']).toBe('text/html; charset=utf-8');
+  });
+  test('Contents', async () => {
+    const res = await request(app).get('/');
+    expect(res.text).toContain('<h1 class="mb-4">Blog</h1>');
+  });
+  afterAll(() => {
+    server.close();
+  });
+});

@@ -1,10 +1,11 @@
-var express = require('express');
-var router = express.Router();
+const express = require('express');
 
-function home(req, res, next) {
+const router = express.Router();
+
+function home(req, res) {
   res.render('home');
 }
 
-router.get('/', home)
+router.get('/', home);
 
 module.exports = router;
