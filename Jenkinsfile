@@ -13,11 +13,6 @@ pipeline{
                 sh './blogs.sh'
             }
         }
-        stage("Deploy"){
-            steps{
-                sh 'npm run start'
-            }
-        }
         stage("Unit Test"){
             steps{
                 sh 'npm run unit-test'
@@ -26,6 +21,11 @@ pipeline{
         stage("UI Test"){
             steps{
                 sh 'npm run cypress-test'
+            }
+        }
+        stage("Deploy"){
+            steps{
+                sh 'npm run start'
             }
         }
     }
