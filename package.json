@@ -5,7 +5,7 @@
   "scripts": {
     "start": "nodemon ./bin/www",
     "unit-test": "jest unit.test.js --coverage",
-    "cypress-test": "cypress run"
+    "cypress-test": "cypress open"
   },
   "dependencies": {
     "bootstrap": "^5.1.3",
